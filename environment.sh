@@ -32,17 +32,9 @@ export EC_DOMAIN_REPO=git@github.com:epics-containers/blxxi-template.git
 
 #### SECTION 2. Install ec #####################################################
 
-# check if epics-containers-cli (ec command) is installed and install if not
-if ! ec --version &> /dev/null; then
-    # must be in a venv and this is the reliable check
-    if python3 -c 'import sys; sys.exit(0 if sys.base_prefix==sys.prefix else 1)'; then
-        echo "ERROR: Please activate a virtualenv and re-run"
-        return
-    elif ! ec --version &> /dev/null; then
-        pip install -r ${THIS_DIR}/requirements.txt
-    fi
-    ec --install-completion ${SHELL} &> /dev/null
-fi
+#  use the ec version from dls_sw/work/python3
+mkdir -p $HOME/.local/bin
+ln -fs /dls_sw/work/python3/ec-venv/bin/ec $HOME/.local/bin/ec
 
 # enable shell completion for ec commands
 source <(ec --show-completion ${SHELL})
