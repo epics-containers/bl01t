@@ -16,7 +16,10 @@ jobs:
           python-version: "3.10"
 
       - name: run IOC checks
+        # install yet another json schema validator and epics-containers-cli
         run: |
+          sudo wget -qO /usr/bin/yajsv https://github.com/neilpa/yajsv/releases/download/v1.4.1/yajsv.linux.amd64
+          sudo chmod a+x /usr/bin/yajsv
           python -m pip install --upgrade pip ;
           pip install -r requirements.txt ;
           bash ./ci_verify.sh
