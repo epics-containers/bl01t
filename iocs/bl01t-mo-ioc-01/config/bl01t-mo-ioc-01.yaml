@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ioc-motorsim/releases/download/2023.11.1b1/ibek.ioc.schema.json
+
+ioc_name: "{{ ioc_yaml_file_name }}"
+description: Example simulated motion IOC for BL01T
+
+entities:
+  - type: motorSim.simMotorController
+    controllerName: controllerOne
+    numAxes: 8
+    P: "BL01T-MO-TST-01:"
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 0
+    DESC: "Motor {{ADDR}}"
+    home: 500
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 1
+    DESC: "Motor {{ADDR}}"
+    home: 500
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 2
+    DESC: "Motor {{ADDR}}"
+    home: 1500
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 3
+    DESC: "Motor {{ADDR}}"
+    home: 2500
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 4
+    DESC: "Motor {{ADDR}}"
+    home: 3000
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 5
+    DESC: "Motor {{ADDR}}"
+    home: 500
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 6
+    DESC: "Motor {{ADDR}}"
+    home: 1500
+
+  - type: motorSim.simMotorAxis
+    controller: controllerOne
+    M: M{{ADDR}}
+    ADDR: 7
+    DESC: "Motor {{ADDR}}"
+    home: 2500

@@ -11,17 +11,17 @@ fi
 
 THIS_DIR=$(dirname ${0})
 
-echo "Loading IOC environment for blxxi ..."
+echo "Loading IOC environment for example beamline bl01t ..."
 
 #### SECTION 1. Environment variables ##########################################
 
 # a mapping between genenric IOC repo roots and the related container registry
 # use spaces to separate multiple mappings
 export EC_REGISTRY_MAPPING='github.com=ghcr.io'
-# the namespace to use for kubernetes deployments - leave blank for local docker
-export EC_K8S_NAMESPACE=
+# the namespace to use for kubernetes deployments - local = local docker/podman
+export EC_K8S_NAMESPACE=local
 # the git repo for this beamline (or accelerator domain)
-export EC_DOMAIN_REPO=git@github.com:epics-containers/blxxi-template.git
+export EC_DOMAIN_REPO=git@github.com:epics-containers/bl01t.git
 # declare your centralised log server Web UI
 # export EC_LOG_URL='https://graylog2.diamond.ac.uk/search?rangetype=relative&fields=message%2Csource&width=1489&highlightMessage=&relative=172800&q=pod_name%3A{ioc_name}*'
 # enforce a specific container cli - defaults to whatever is available
@@ -32,13 +32,24 @@ export EC_DOMAIN_REPO=git@github.com:epics-containers/blxxi-template.git
 
 #### SECTION 2. Install ec #####################################################
 
-#  use the ec version from dls_sw/work/python3
-mkdir -p $HOME/.local/bin
-ln -fs /dls_sw/work/python3/ec-venv/bin/ec $HOME/.local/bin/ec
+#  make sure we have ec CLI installed
+if ! ec --version &> /dev/null; then
+    echo '
+Please install ec CLI from https://github.com/epics-containers/epics-containers-cli
 
-# enable shell completion for ec commands
-source <(ec --show-completion ${SHELL})
+Requires Python 3.9 or later.
 
+Use the following command to install:
+  python3 -mvenv venv
+  source venv/bin/activate
+  pip install epics-containers-cl
+  source environment.sh
+'
+    return 1
+else
+    # enable shell completion for ec commands
+    source <(ec --show-completion ${SHELL})
+fi
 
 #### SECTION 3. Configure Kubernetes Cluster ###################################
 # example of how we set up a cluster at DLS is below
