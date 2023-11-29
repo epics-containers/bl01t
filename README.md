@@ -27,6 +27,7 @@ Cut and paste the following to perform the above steps:
 
 ```bash
 git clone git@github.com:epics-containers/bl01t.git
+cd bl01t
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -68,8 +69,8 @@ start a shell inside the container which does have epics installed:
 ```bash
 ec ioc exec bl01t-mo-ioc-01
 
-caput BL01T-MO-IOC-01:M1 500
-camonitor BL01T-MO-IOC-01:M1.RBV
+caput BL01T-MO-TST-01:M1 500
+camonitor BL01T-MO-TST-01:M1.RBV
 
 # ctrl-d to exit
 ```
