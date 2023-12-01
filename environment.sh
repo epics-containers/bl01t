@@ -22,6 +22,10 @@ export EC_REGISTRY_MAPPING='github.com=ghcr.io'
 export EC_K8S_NAMESPACE=local
 # the git repo for this beamline (or accelerator domain)
 export EC_DOMAIN_REPO=git@github.com:epics-containers/bl01t.git
+# for the devcontainer, EC_REMOTE_USER should be vscode for docker, blank for podman
+if [[ $(podman --version 2> /dev/null) != "podman version"* ]] ; then
+    export EC_REMOTE_USER=vscode
+fi
 # declare your centralised log server Web UI
 # export EC_LOG_URL='https://graylog2.diamond.ac.uk/search?rangetype=relative&fields=message%2Csource&width=1489&highlightMessage=&relative=172800&q=pod_name%3A{ioc_name}*'
 # enforce a specific container cli - defaults to whatever is available
