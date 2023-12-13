@@ -13,7 +13,7 @@ entities:
     controller: controllerOne
     M: M{{ADDR}}
     ADDR: 0
-    DESC: "Motor {{ADDR}}"
+    DESC: "Motor {{ADDR}} {{ioc_name}}"
     home: 500
 
   - type: motorSim.simMotorAxis
@@ -22,6 +22,7 @@ entities:
     ADDR: 1
     DESC: "Motor {{ADDR}}"
     home: 500
+    start: "ioc = {{ioc_name}}"
 
   - type: motorSim.simMotorAxis
     controller: controllerOne
