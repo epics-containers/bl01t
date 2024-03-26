@@ -14,7 +14,7 @@ ioc-instance:
 
   # useHostNetwork - use host network for IOC - required for Channel Access
   # to work outside of the cluster
-  hostNetwork: true
+  hostNetwork: false
 
   # useAffinity - only run on nodes with label beamline:<beamline-name>
   # or location:<location-name>

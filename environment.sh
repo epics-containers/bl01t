@@ -21,7 +21,7 @@ export EC_REGISTRY_MAPPING_REGEX='
 .*gitlab.diamond.ac.uk.*\/(.*) gcr.io/diamond-privreg/controls/prod/ioc/\1
 '
 # the namespace to use for kubernetes deployments - use local for local docker/podman
-export EC_K8S_NAMESPACE=local
+export EC_K8S_NAMESPACE=${USER}
 # the git repo for this project
 export EC_SERVICES_REPO=git@github.com:epics-containers/bl01t.git
 # declare your centralised log server Web UI
@@ -47,6 +47,20 @@ source <(ec --show-completion ${SHELL})
 #### SECTION 3. Configure Kubernetes Cluster ###################################
 
 
-# no cofiguration in this section for local docker/podman deployments
+
+# the following configures kubernetes inside DLS.
+
+module unload argus > /dev/null
+module load argus > /dev/null
+# set the default namespace for kubectl and helm (for convenience only)
+kubectl config set-context --current --namespace=${USER}
+# make sure the user has provided credentials
+kubectl version --short
+
+
+# enable shell completion for k8s tools
+if [ -n "$ZSH_VERSION" ]; then SHELL=zsh; fi
+source <(helm completion $(basename ${SHELL}))
+source <(kubectl completion $(basename ${SHELL}))
 
 
