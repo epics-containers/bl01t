@@ -10,4 +10,4 @@ dependencies:
   - name: ioc-instance
     version: "3.4.0"
     repository: "oci://ghcr.io/epics-containers"
-    #repository: "file:///scratch/hgv27681/work/ec-helm-charts/Charts/ioc-instance"
+    # repository: "file:///home/esq51579/WIP/ec-helm-charts/Charts/ioc-instance"
